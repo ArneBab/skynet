@@ -42,7 +42,7 @@ exec guile -L $(dirname $(realpath "$0")) -e '(skynet)' -s "$0" "$@"
       (when {remaining > 0}
             (spawn-fiber
              (λ() (skynet {level + 1} index channel))
-             #:parallel? {level < 2}) ;; stay on processor for later levels
+             #:parallel? #t)
             (create {remaining - 1}
                     {index + 1})))
     (let collect ((remaining children)
